@@ -22,11 +22,11 @@ if($show == "#"){
      $server = "122.155.209.75";
      $username = $url["user"];
      $password = $url["pass"];
-     $db = substr($url["path"], 1);
+     $db = "billionaire888";//substr($url["path"], 1);
 
      $conn = new mysqli($server, $username, $password, $db);
      
-     $sql_check = "select * from tbl_cardid where tb_cardid = '".$idcard."'";
+     $sql_check = "select * from tbl_customer where cus_id = '".$idcard."'";
      $result = $conn->query($sql_check);
      $query_check = mysqli_query($conn,$sql_check);
      if($result->num_rows > 0){
@@ -36,9 +36,9 @@ if($show == "#"){
        $name = "";
        $tb_status = "";
        $msg = $row['tb_message'];
-       $cardid = $row['tb_cardid'];
-       $name = $row['tb_name'];
-       $tb_status = $row['tb_status'];
+       $cardid = $row['cus_id'];
+       $name = $row['cus_firstname'];
+       $tb_status = $row['cus_nickname'];
        $arrPostData = array();
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
        $arrPostData['messages'][0]['type'] = "text";
