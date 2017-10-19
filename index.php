@@ -22,7 +22,7 @@ if($show == "#"){
      $db_name="checkid_db";
 
      $conndb=mysqli_connect($hostname_condb,$username_condb,$password_conndb,$db_name);
-     if (mysqli_connect_errno())
+     if ($conndb)
      {
        $arrPostData = array();
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
