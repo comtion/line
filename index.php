@@ -24,11 +24,14 @@ $username = $url["user"];
 $password = $url["pass"];
 $db = substr($url["path"], 1);
 
-//$conn = new mysqli($server, $username, $password, $db);
-     $arrPostData = array();
+$conndb=mysqli_connect($server,$username,$password,$db);
+    if (mysqli_connect_errno())
+{
+	$arrPostData = array();
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
        $arrPostData['messages'][0]['type'] = "text";
        $arrPostData['messages'][0]['text'] = $server;
+}
      /*$sql_check = "select * from tbl_customer where cus_id = '".$idcard."'";
      $result = $conn->query($sql_check);
      if($result->num_rows > 0){
