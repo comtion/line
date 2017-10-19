@@ -16,7 +16,7 @@ if($show == "#"){
  if($idcard!=""){
    $countid = strlen($idcard);
    if($countid == "13"){
-     $hostname_condb="http://hotspot.idms.pw:81/phpmyadmin/";
+     $hostname_condb="hotspot.idms.pw:81/phpmyadmin/";
      $username_condb="root";
      $password_conndb="k1tsada2532";
      $db_name="checkid_db";
