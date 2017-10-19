@@ -46,7 +46,7 @@ if($show == "#"){
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
        $arrPostData['messages'][0]['type'] = "text";
        $arrPostData['messages'][0]['text'] = $idcard;
-       $arrPostData = array();
+       /*$arrPostData = array();
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
        $arrPostData['messages'][0]['type'] = "text";
        $arrPostData['messages'][0]['text'] = $msg;
@@ -61,12 +61,12 @@ if($show == "#"){
        $arrPostData = array();
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
        $arrPostData['messages'][0]['type'] = "text";
-       $arrPostData['messages'][0]['text'] = "สถานะ ".$tb_status;
+       $arrPostData['messages'][0]['text'] = "สถานะ ".$tb_status;*/
      }else{
        $arrPostData = array();
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
        $arrPostData['messages'][0]['type'] = "text";
-       $arrPostData['messages'][0]['text'] = "ไม่พบเลขบัตรประชาชน";
+       $arrPostData['messages'][0]['text'] = "ไม่พบเลขบัตรประชาชน ".$idcard;;
      }
      
    }else{
