@@ -45,6 +45,10 @@ if($show == "#"){
        $arrPostData = array();
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
        $arrPostData['messages'][0]['type'] = "text";
+       $arrPostData['messages'][0]['text'] = $idcard;
+       $arrPostData = array();
+       $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+       $arrPostData['messages'][0]['type'] = "text";
        $arrPostData['messages'][0]['text'] = $msg;
        $arrPostData = array();
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
