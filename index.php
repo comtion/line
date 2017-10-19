@@ -35,9 +35,14 @@ if($show == "#"){
      $username = $url["user"];
      $password = $url["pass"];
      $db = substr($url["path"], 1);
-
+ 
      $conndb = mysqli_connect($server, $username, $password);
-     mysqli_select_db($db);
+    
+    $arrPostData = array();
+       $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+       $arrPostData['messages'][0]['type'] = "text";
+       $arrPostData['messages'][0]['text'] = $db;
+     /*mysqli_select_db($db);
      $sql_check = "select * from tbl_cardid where tb_cardid = '".$idcard."'";
      $query_check = mysqli_query($conndb,$sql_check);
      $row_check = mysqli_num_rows($query_check);
@@ -70,13 +75,13 @@ if($show == "#"){
        $arrPostData = array();
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
        $arrPostData['messages'][0]['type'] = "text";
-       $arrPostData['messages'][0]['text'] = "สถานะ ".$tb_status;*/
+       $arrPostData['messages'][0]['text'] = "สถานะ ".$tb_status;
      }else{
        $arrPostData = array();
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
        $arrPostData['messages'][0]['type'] = "text";
        $arrPostData['messages'][0]['text'] = "ไม่พบเลขบัตรประชาชน ".$idcard;;
-     }
+     }*/
      
    }else{
      $arrPostData = array();
