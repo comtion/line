@@ -28,9 +28,9 @@ $conn = new mysqli($server, $username, $password, $db);
      
      $sql_check = "select * from tbl_customer where cus_id = '".$idcard."'";
      $result = $conn->query($sql_check);
-     $query_check = mysqli_query($conn,$sql_check);
+    
      if($result->num_rows > 0){
-      $row = $result->fetch_assoc();
+      while($row = $result->fetch_assoc()) {
        $msg = "";
        $cardid = "";
        $name = "";
@@ -59,6 +59,7 @@ $conn = new mysqli($server, $username, $password, $db);
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
        $arrPostData['messages'][0]['type'] = "text";
        $arrPostData['messages'][0]['text'] = "สถานะ ".$tb_status;
+      }
      }else{
        $arrPostData = array();
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
