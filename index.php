@@ -80,6 +80,11 @@ if($show == "#"){
        $arrPostData['messages'][0]['type'] = "text";
        $arrPostData['messages'][0]['text'] = "ไม่พบเลขบัตรประชาชน ".$idcard;;
      }
+     }else{
+      $arrPostData = array();
+       $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+       $arrPostData['messages'][0]['type'] = "text";
+       $arrPostData['messages'][0]['text'] = $server;
      }
    }else{
      $arrPostData = array();
