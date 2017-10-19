@@ -16,7 +16,7 @@ if($show == "#"){
  if($idcard!=""){
    $countid = strlen($idcard);
    if($countid == "13"){
-     $hostname_condb="hotspot.idms.pw:81/phpmyadmin/";
+     $hostname_condb="http://hotspot.idms.pw:81/phpmyadmin/";
      $username_condb="root";
      $password_conndb="k1tsada2532";
      $db_name="checkid_db";
@@ -34,10 +34,14 @@ if($show == "#"){
      $row_check = mysqli_num_rows($query_check);
      if($row_check>0){
        $fetch_check = mysqli_fetch_array($query_check);
+       $msg = $fetch_check['tb_message'];
+       $cardid = $fetch_check['tb_cardid'];
+       $name = $fetch_check['tb_name'];
+       $tb_status = $fetch_check['tb_status'];
        $arrPostData = array();
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
        $arrPostData['messages'][0]['type'] = "text";
-       $arrPostData['messages'][0]['text'] = $fetch_check['tb_message']."<br>เลขบัตร ".$fetch_check['tb_cardid']."<br>ชื่อ ".$fetch_check['tb_name']."<br>สถานะ ".$fetch_check['tb_status'];
+       $arrPostData['messages'][0]['text'] = $msg."<br>เลขบัตร ".$cardid."<br>ชื่อ ".$name."<br>สถานะ ".$tb_status;
      }else{
        $arrPostData = array();
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
