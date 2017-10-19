@@ -19,12 +19,12 @@ if($show == "#"){
     
      $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
-     $server = "122.155.209.75";
-     $username = $url["user"];
-     $password = $url["pass"];
-     $db = "billionaire888";//substr($url["path"], 1);
+$server = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$db = substr($url["path"], 1);
 
-     $conn = new mysqli($server, $username, $password, $db);
+$conn = new mysqli($server, $username, $password, $db);
      
      $sql_check = "select * from tbl_customer where cus_id = '".$idcard."'";
      $result = $conn->query($sql_check);
