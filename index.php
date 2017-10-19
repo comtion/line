@@ -25,13 +25,7 @@ $password = $url["pass"];
 $db = substr($url["path"], 1);
 
 $conndb=mysqli_connect($server,$username,$password,$db);
-    if (mysqli_connect_errno())
-{
-	$arrPostData = array();
-       $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-       $arrPostData['messages'][0]['type'] = "text";
-       $arrPostData['messages'][0]['text'] = $server;
-}
+   
 	    
      $sql_check = "select * from tbl_customer where cus_id = '".$idcard."'";
      $result = mysqli_query($conndb,$sql_check);
