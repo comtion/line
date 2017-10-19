@@ -29,6 +29,7 @@ if($show == "#"){
        $arrPostData['messages'][0]['type'] = "text";
        $arrPostData['messages'][0]['text'] = "Error Connect";
      }
+     mysqli_query($conndb,"SET NAMES 'utf8'");
      $sql_check = "select * from tbl_cardid where tb_cardid = '".$idcard."'";
      $query_check = mysqli_query($conndb,$sql_check);
      $row_check = mysqli_num_rows($query_check);
@@ -65,8 +66,8 @@ if($show == "#"){
      }else{
        $arrPostData = array();
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-       $arrPostData['messages'][1]['type'] = "text";
-       $arrPostData['messages'][1]['text'] = "ไม่พบเลขบัตรประชาชน ".$idcard;;
+       $arrPostData['messages'][0]['type'] = "text";
+       $arrPostData['messages'][0]['text'] = "ไม่พบเลขบัตรประชาชน ".$idcard;;
      }
      
    }else{
