@@ -31,17 +31,17 @@ if($show == "#"){
      }
      */
      $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+
      $server = $url["host"];
      $username = $url["user"];
      $password = $url["pass"];
      $db = substr($url["path"], 1);
- 
-     $conndb = mysql_connect($server, $username, $password);
-     mysql_select_db($db);
-     mysql_query($conndb,"SET NAMES 'utf8'");
+
+     $conn = new mysqli($server, $username, $password, $db);
+     mysql_query($conn,"SET NAMES 'utf8'");
      
      $sql_check = "select * from tbl_cardid where tb_cardid = '".$idcard."'";
-     $query_check = mysql_query($conndb,$sql_check);
+     $query_check = mysql_query($conn,$sql_check);
      if($query_check){
      $row_check = mysql_num_rows($query_check);
      if($row_check>0){
