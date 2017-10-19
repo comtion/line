@@ -25,10 +25,14 @@ $password = $url["pass"];
 $db = substr($url["path"], 1);
 
 $conn = new mysqli($server, $username, $password, $db);
-     
+     if ($conn->connect_errno) {
+         $arrPostData = array();
+       $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+       $arrPostData['messages'][0]['type'] = "text";
+       $arrPostData['messages'][0]['text'] = "ไม่พบดาต้า ".$db;
+     }
      $sql_check = "select * from tbl_customer where cus_id = '".$idcard."'";
      $result = $conn->query($sql_check);
-    if($result){
      if($result->num_rows > 0){
       while($row = $result->fetch_assoc()) {
        $msg = "";
@@ -65,12 +69,6 @@ $conn = new mysqli($server, $username, $password, $db);
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
        $arrPostData['messages'][0]['type'] = "text";
        $arrPostData['messages'][0]['text'] = "ไม่พบเลขบัตรประชาชน ".$idcard;
-     }
-    }else{
-       $arrPostData = array();
-       $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-       $arrPostData['messages'][0]['type'] = "text";
-       $arrPostData['messages'][0]['text'] = $server;
      }
    }else{
      $arrPostData = array();
