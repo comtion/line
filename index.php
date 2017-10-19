@@ -10,27 +10,53 @@ $strUrl = "https://api.line.me/v2/bot/message/reply";
 $arrHeader = array();
 $arrHeader[] = "Content-Type: application/json";
 $arrHeader[] = "Authorization: Bearer {$strAccessToken}";
- 
-if($arrJson['events'][0]['message']['text'] == "สวัสดี"){
+$show = substr($arrJson['events'][0]['message']['text'],0,1);
+$idcard = substr($arrJson['events'][0]['message']['text'],1);
+if($show == "#"){
+ if($idcard!=""){
+   $countid = strlen($idcard);
+   if($countid == "13"){
+     $hostname_condb="http://hotspot.idms.pw:81/phpmyadmin/";
+     $username_condb="root";
+     $password_conndb="k1tsada2532";
+     $db_name="checkid_db";
+
+     $conndb=mysqli_connect($hostname_condb,$username_condb,$password_conndb,$db_name);
+    
+     $sql_check = "select * from tbl_cardid where tb_cardid = '".$idcard."'";
+     $query_check = mysqli_query($conndb,$sql_check);
+     $row_check = mysqli_num_rows($query_check);
+     if($row_check>0){
+       $fetch_check = mysqli_fetch_array($query_check);
+       $arrPostData = array();
+       $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+       $arrPostData['messages'][0]['type'] = "text";
+       $arrPostData['messages'][0]['text'] = $fetch_check['tb_message']."<br>เลขบัตร ".$fetch_check['tb_cardid']."<br>ชื่อ ".$fetch_check['tb_name']."<br>สถานะ ".$fetch_check['tb_status'];
+     }else{
+       $arrPostData = array();
+       $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+       $arrPostData['messages'][0]['type'] = "text";
+       $arrPostData['messages'][0]['text'] = "ไม่พบเลขบัตรประชาชน";
+     }
+     
+   }else{
+     $arrPostData = array();
+     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+     $arrPostData['messages'][0]['type'] = "text";
+     $arrPostData['messages'][0]['text'] = "เลขบัตรประชาชนไม่ถูกต้อง";
+   }
+ }else{
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
   $arrPostData['messages'][0]['type'] = "text";
-  $arrPostData['messages'][0]['text'] = "สวัสดี ID คุณคือ ".$arrJson['events'][0]['source']['userId'];
-}else if($arrJson['events'][0]['message']['text'] == "ชื่ออะไร"){
-  $arrPostData = array();
-  $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-  $arrPostData['messages'][0]['type'] = "text";
-  $arrPostData['messages'][0]['text'] = "ฉันยังไม่มีชื่อนะ";
-}else if($arrJson['events'][0]['message']['text'] == "ทำอะไรได้บ้าง"){
-  $arrPostData = array();
-  $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-  $arrPostData['messages'][0]['type'] = "text";
-  $arrPostData['messages'][0]['text'] = "ฉันทำอะไรไม่ได้เลย คุณต้องสอนฉันอีกเยอะ";
+  $arrPostData['messages'][0]['text'] = "บุคคลดังกล่าวไม่มีหมายจับ";
+ }
+  
 }else{
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
   $arrPostData['messages'][0]['type'] = "text";
-  $arrPostData['messages'][0]['text'] = "ฉันไม่เข้าใจคำสั่ง";
+  $arrPostData['messages'][0]['text'] = "บุ";
 }
  
  
