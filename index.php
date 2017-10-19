@@ -34,6 +34,10 @@ if($show == "#"){
      $row_check = mysqli_num_rows($query_check);
      if($row_check>0){
        $fetch_check = mysqli_fetch_array($query_check);
+       $msg = "";
+       $cardid = "";
+       $name = "";
+       $tb_status = "";
        $msg = $fetch_check['tb_message'];
        $cardid = $fetch_check['tb_cardid'];
        $name = $fetch_check['tb_name'];
