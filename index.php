@@ -25,17 +25,10 @@ $password = $url["pass"];
 $db = substr($url["path"], 1);
 
 $conn = new mysqli($server, $username, $password, $db);
-     if ($conn->ping()) {
-         $arrPostData = array();
+     $arrPostData = array();
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
        $arrPostData['messages'][0]['type'] = "text";
-       $arrPostData['messages'][0]['text'] = "ok data";
-     } else {
-         $arrPostData = array();
-         $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-         $arrPostData['messages'][0]['type'] = "text";
-         $arrPostData['messages'][0]['text'] = "Error";
-     }
+       $arrPostData['messages'][0]['text'] = $server;
      /*$sql_check = "select * from tbl_customer where cus_id = '".$idcard."'";
      $result = $conn->query($sql_check);
      if($result->num_rows > 0){
