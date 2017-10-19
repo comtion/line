@@ -22,7 +22,13 @@ if($show == "#"){
      $db_name="checkid_db";
 
      $conndb=mysqli_connect($hostname_condb,$username_condb,$password_conndb,$db_name);
-    
+     if (mysqli_connect_errno())
+     {
+       $arrPostData = array();
+       $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+       $arrPostData['messages'][0]['type'] = "text";
+       $arrPostData['messages'][0]['text'] = mysqli_connect_error();
+     }
      $sql_check = "select * from tbl_cardid where tb_cardid = '".$idcard."'";
      $query_check = mysqli_query($conndb,$sql_check);
      $row_check = mysqli_num_rows($query_check);
