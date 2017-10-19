@@ -16,23 +16,10 @@ if($show == "#"){
  if($idcard!=""){
    $countid = strlen($idcard);
    if($countid == "13"){
-     /*$hostname_condb="http://hotspot.idms.pw:81/phpmyadmin/";
-     $username_condb="root";
-     $password_conndb="k1tsada2532";
-     $db_name="checkid_db";
-
-     $conndb=mysqli_connect($hostname_condb,$username_condb,$password_conndb,$db_name);
-     if (!$conndb)
-     {
-       $arrPostData = array();
-       $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-       $arrPostData['messages'][0]['type'] = "text";
-       $arrPostData['messages'][0]['text'] = "Error Connect";
-     }
-     */
+    
      $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
-     $server = $url["host"];
+     $server = "122.155.209.75";
      $username = $url["user"];
      $password = $url["pass"];
      $db = substr($url["path"], 1);
