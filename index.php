@@ -36,16 +36,16 @@ if($show == "#"){
      $password = $url["pass"];
      $db = substr($url["path"], 1);
  
-     $conndb = mysqli_connect($server, $username, $password);
-     mysqli_select_db($db);
-     mysqli_query($conndb,"SET NAMES 'utf8'");
+     $conndb = mysql_connect($server, $username, $password);
+     mysql_select_db($db);
+     mysql_query($conndb,"SET NAMES 'utf8'");
      
      $sql_check = "select * from tbl_cardid where tb_cardid = '".$idcard."'";
-     $query_check = mysqli_query($conndb,$sql_check);
+     $query_check = mysql_query($conndb,$sql_check);
      if($query_check){
-     $row_check = mysqli_num_rows($query_check);
+     $row_check = mysql_num_rows($query_check);
      if($row_check>0){
-       $fetch_check = mysqli_fetch_array($query_check);
+       $fetch_check = mysql_fetch_array($query_check);
        $msg = "";
        $cardid = "";
        $name = "";
