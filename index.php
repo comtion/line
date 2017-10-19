@@ -38,22 +38,20 @@ if($show == "#"){
      $db = substr($url["path"], 1);
 
      $conn = new mysqli($server, $username, $password, $db);
-     mysqli_query($conn,"SET NAMES 'utf8'");
      
      $sql_check = "select * from tbl_cardid where tb_cardid = '".$idcard."'";
+     $result = $conn->query($sql_check);
      $query_check = mysqli_query($conn,$sql_check);
-     if($query_check){
-     $row_check = mysqli_num_rows($query_check);
-     if($row_check>0){
-       $fetch_check = mysqli_fetch_array($query_check);
+     if($result->num_rows > 0){
+      $row = $result->fetch_assoc();
        $msg = "";
        $cardid = "";
        $name = "";
        $tb_status = "";
-       $msg = $fetch_check['tb_message'];
-       $cardid = $fetch_check['tb_cardid'];
-       $name = $fetch_check['tb_name'];
-       $tb_status = $fetch_check['tb_status'];
+       $msg = $row['tb_message'];
+       $cardid = $row['tb_cardid'];
+       $name = $row['tb_name'];
+       $tb_status = $row['tb_status'];
        $arrPostData = array();
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
        $arrPostData['messages'][0]['type'] = "text";
@@ -79,12 +77,6 @@ if($show == "#"){
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
        $arrPostData['messages'][0]['type'] = "text";
        $arrPostData['messages'][0]['text'] = "ไม่พบเลขบัตรประชาชน ".$idcard;;
-     }
-     }else{
-      $arrPostData = array();
-       $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-       $arrPostData['messages'][0]['type'] = "text";
-       $arrPostData['messages'][0]['text'] = $server;
      }
    }else{
      $arrPostData = array();
