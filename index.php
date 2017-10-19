@@ -42,6 +42,7 @@ if($show == "#"){
      
      $sql_check = "select * from tbl_cardid where tb_cardid = '".$idcard."'";
      $query_check = mysqli_query($conndb,$sql_check);
+     if($query_check){
      $row_check = mysqli_num_rows($query_check);
      if($row_check>0){
        $fetch_check = mysqli_fetch_array($query_check);
@@ -79,13 +80,14 @@ if($show == "#"){
        $arrPostData['messages'][0]['type'] = "text";
        $arrPostData['messages'][0]['text'] = "ไม่พบเลขบัตรประชาชน ".$idcard;;
      }
-     
+     }
    }else{
      $arrPostData = array();
      $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
      $arrPostData['messages'][0]['type'] = "text";
      $arrPostData['messages'][0]['text'] = "เลขบัตรประชาชนไม่ถูกต้อง";
    }
+    
  }else{
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
