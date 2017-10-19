@@ -32,10 +32,12 @@ $conndb=mysqli_connect($server,$username,$password,$db);
        $arrPostData['messages'][0]['type'] = "text";
        $arrPostData['messages'][0]['text'] = $server;
 }
-     /*$sql_check = "select * from tbl_customer where cus_id = '".$idcard."'";
-     $result = $conn->query($sql_check);
-     if($result->num_rows > 0){
-      while($row = $result->fetch_assoc()) {
+	    
+     $sql_check = "select * from tbl_customer where cus_id = '".$idcard."'";
+     $result = mysqli_query($conndb,$sql_check);
+	   $rows = mysqli_num_rows($result);
+     if($rows > 0){
+      while($row = mysqli_fetch_array($result)) {
        $msg = "";
        $cardid = "";
        $name = "";
@@ -70,7 +72,7 @@ $conndb=mysqli_connect($server,$username,$password,$db);
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
        $arrPostData['messages'][0]['type'] = "text";
        $arrPostData['messages'][0]['text'] = "ไม่พบเลขบัตรประชาชน ".$idcard;
-     }*/
+     }
    }else{
      $arrPostData = array();
      $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
