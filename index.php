@@ -16,7 +16,7 @@ if($show == "#"){
  if($idcard!=""){
    $countid = strlen($idcard);
    if($countid == "13"){
-     $hostname_condb="http://hotspot.idms.pw:81/phpmyadmin/";
+     /*$hostname_condb="http://hotspot.idms.pw:81/phpmyadmin/";
      $username_condb="root";
      $password_conndb="k1tsada2532";
      $db_name="checkid_db";
@@ -29,7 +29,15 @@ if($show == "#"){
        $arrPostData['messages'][0]['type'] = "text";
        $arrPostData['messages'][0]['text'] = "Error Connect";
      }
-     mysqli_query($conndb,"SET NAMES 'utf8'");
+     mysqli_query($conndb,"SET NAMES 'utf8'");*/
+     $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+     $server = $url["host"];
+     $username = $url["user"];
+     $password = $url["pass"];
+     $db = substr($url["path"], 1);
+
+     $conndb = mysqli_connect($server, $username, $password);
+     mysqli_select_db($db);
      $sql_check = "select * from tbl_cardid where tb_cardid = '".$idcard."'";
      $query_check = mysqli_query($conndb,$sql_check);
      $row_check = mysqli_num_rows($query_check);
