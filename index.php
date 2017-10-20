@@ -67,23 +67,11 @@ if($show == "#"){
             curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch1, CURLOPT_URL, 'http://122.155.209.75/SPL888/process/process_linebot.php?card_id='.$idcard);
             $result1 = curl_exec($ch1);
-	   
-	   if( !$result1 = curl_exec($ch1)) 
-	    { 
-		trigger_error(curl_error($ch1)); 
-	    }else{ 
-            
+	    curl_close($ch1);
             $obj = json_decode($result1, true);
-	   	$arrPostData = array();
-	       $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-	       $arrPostData['messages'][0]['type'] = "text";
-	       $arrPostData['messages'][0]['text'] = "111";
-	   }
-	   curl_close($ch1);
-            
-            /*if($obj->return_status=="1"){
-		$id = $obj->cus_id;
-		$cus_firstname = $obj->cus_firstname;
+            if($obj['return_status']=="1"){
+		$id = $obj['cus_id'];
+		$cus_firstname = $obj['cus_firstname'];
                 $arrPostData = array();
 	       $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
 	       $arrPostData['messages'][0]['type'] = "text";
@@ -94,7 +82,7 @@ if($show == "#"){
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
        $arrPostData['messages'][0]['type'] = "text";
        $arrPostData['messages'][0]['text'] = "ไม่พบเลขบัตรประชาชน ".$idcard;
-     }*/
+     }
    }else{
      $arrPostData = array();
      $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
