@@ -70,7 +70,11 @@ if($show == "#"){
             curl_close($ch1);
             
             $obj = json_decode($result1, true);
-            if($obj->return_status=="1"){
+	   	$arrPostData = array();
+	       $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+	       $arrPostData['messages'][0]['type'] = "text";
+	       $arrPostData['messages'][0]['text'] = $obj;
+            /*if($obj->return_status=="1"){
 		$id = $obj->cus_id;
 		$cus_firstname = $obj->cus_firstname;
                 $arrPostData = array();
@@ -83,7 +87,7 @@ if($show == "#"){
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
        $arrPostData['messages'][0]['type'] = "text";
        $arrPostData['messages'][0]['text'] = "ไม่พบเลขบัตรประชาชน ".$idcard;
-     }
+     }*/
    }else{
      $arrPostData = array();
      $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
