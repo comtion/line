@@ -17,14 +17,14 @@ if($show == "#"){
    $countid = strlen($idcard);
    if($countid == "13"){
     
-     $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+    /* $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
-$server = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$db = substr($url["path"], 1);
+	$server = $url["host"];
+	$username = $url["user"];
+	$password = $url["pass"];
+	$db = substr($url["path"], 1);
 
-$conndb=mysqli_connect($server,$username,$password,$db);
+	$conndb=mysqli_connect($server,$username,$password,$db);
    
 	    
      $sql_check = "select * from tbl_customer where cus_id = '".$idcard."'";
@@ -61,7 +61,24 @@ $conndb=mysqli_connect($server,$username,$password,$db);
        $arrPostData['messages'][0]['type'] = "text";
        $arrPostData['messages'][0]['text'] = "สถานะ ".$tb_status;
       }
-     }else{
+     }*/
+	     $ch1 = curl_init();
+            curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch1, CURLOPT_URL, 'http://122.155.209.75/SPL888/process/process_linebot.php?card_id='.$idcard);
+            $result1 = curl_exec($ch1);
+            curl_close($ch1);
+            
+            $obj = json_decode($result1, true);
+            if($obj['return_status']=="1"){
+		$id = $obj['cus_id'];
+		$cus_firstname = $obj['cus_firstname'];
+                $arrPostData = array();
+	       $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+	       $arrPostData['messages'][0]['type'] = "text";
+	       $arrPostData['messages'][0]['text'] = "เลขบัตร ".$id." ชื่อ ".$cus_firstname;
+            }
+     else{
        $arrPostData = array();
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
        $arrPostData['messages'][0]['type'] = "text";
