@@ -26,7 +26,7 @@ if($show == "#"){
 
 	$conndb=mysqli_connect($server,$username,$password,$db);
    
-	    
+	    mysqli_query($conndb,"SET NAMES 'utf8'");
      $sql_check = "select * from people where people_id = '".$idcard."'";
      $result = mysqli_query($conndb,$sql_check);
 	   $rows = mysqli_num_rows($result);
