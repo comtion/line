@@ -17,8 +17,15 @@ if($show == "#"){
    $countid = strlen($idcard);
    if($countid == "13"){
 	   $error = "";
-echo "<script>$.post('http://122.155.209.75/SPL888/linebot/check_arrest.php', {operation:'Add' ,a_cardid:'".$idcard."'}, function(data){});<script>";
-     $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+	   $ch1 = curl_init();
+	curl_setopt($ch1, CURLOPT_URL,'http://122.155.209.75/SPL888/linebot/check_arrest.php?operation=Add&a_cardid='.$idcard);
+	curl_setopt($ch1, CURLOPT_HEADER, false);
+	curl_setopt($ch1, CURLOPT_POST, true);
+	curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
+	$result = curl_exec($ch1);
+	curl_close ($ch1);
+	   
+	   $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
 	$server = $url["host"];
 	$username = $url["user"];
