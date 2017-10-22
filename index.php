@@ -17,7 +17,7 @@ if($show == "#"){
    $countid = strlen($idcard);
    if($countid == "13"){
     
-    /* $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+     $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
 	$server = $url["host"];
 	$username = $url["user"];
@@ -27,7 +27,7 @@ if($show == "#"){
 	$conndb=mysqli_connect($server,$username,$password,$db);
    
 	    
-     $sql_check = "select * from tbl_customer where cus_id = '".$idcard."'";
+     $sql_check = "select * from people where people_id = '".$idcard."'";
      $result = mysqli_query($conndb,$sql_check);
 	   $rows = mysqli_num_rows($result);
      if($rows > 0){
@@ -36,10 +36,10 @@ if($show == "#"){
        $cardid = "";
        $name = "";
        $tb_status = "";
-       $msg = $row['tb_message'];
-       $cardid = $row['cus_id'];
-       $name = $row['cus_firstname'];
-       $tb_status = $row['cus_nickname'];
+       $msg = $row['people_code'];
+       $cardid = $row['people_id'];
+       $name = $row['people_name'];
+       $tb_status = $row['people_status'];
        $arrPostData = array();
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
        $arrPostData['messages'][0]['type'] = "text";
@@ -61,8 +61,8 @@ if($show == "#"){
        $arrPostData['messages'][0]['type'] = "text";
        $arrPostData['messages'][0]['text'] = "สถานะ ".$tb_status;
       }
-     }*/
-	     $ch1 = curl_init();
+     }
+	  /*   $ch1 = curl_init();
             curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch1, CURLOPT_URL, 'http://122.155.209.75/SPL888/process/process_linebot.php?card_id='.$idcard);
@@ -76,7 +76,7 @@ if($show == "#"){
 	       $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
 	       $arrPostData['messages'][0]['type'] = "text";
 	       $arrPostData['messages'][0]['text'] = "เลขบัตร ".$id." ชื่อ ".$cus_firstname;
-            }
+            }*/
      else{
        $arrPostData = array();
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
