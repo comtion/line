@@ -16,9 +16,17 @@ if($show == "#"){
  if($idcard!=""){
    $countid = strlen($idcard);
    if($countid == "13"){
-    $ch1 = curl_init();
-            curl_setopt($ch1, CURLOPT_URL, 'http://122.155.209.75/SPL888/linebot/check_arrest.php?operation=Add&a_cardid='.$idcard);
-	    curl_close($ch1);
+	   
+   $url = 'http://122.155.209.75/SPL888/linebot/check_arrest.php'; 
+   $data = 'operation=Add&a_cardid='.$idcard;
+   $ch1 = curl_init();
+    curl_setopt( $ch, CURLOPT_URL, $url );
+    curl_setopt( $ch, CURLOPT_POSTFIELDS, $data );
+    curl_setopt( $ch, CURLOPT_POST, true );
+    curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );
+    $content = curl_exec( $ch1 );
+    curl_close($ch1);
      $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
 	$server = $url["host"];
