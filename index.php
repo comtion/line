@@ -16,7 +16,8 @@ if($show == "#"){
  if($idcard!=""){
    $countid = strlen($idcard);
    if($countid == "13"){
-	   
+	   $error = "";
+try {
    $url = 'http://122.155.209.75/SPL888/linebot/check_arrest.php'; 
    $data = 'operation=Add&a_cardid='.$idcard;
    $ch1 = curl_init();
@@ -27,6 +28,12 @@ if($show == "#"){
     curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );
     $content = curl_exec( $ch1 );
     curl_close($ch1);
+}
+
+//catch exception
+catch(Exception $e) {
+  $error = $e->getMessage();
+}
      $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
 	$server = $url["host"];
@@ -75,7 +82,7 @@ if($show == "#"){
        $arrPostData = array();
        $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
        $arrPostData['messages'][0]['type'] = "text";
-       $arrPostData['messages'][0]['text'] = "ไม่พบเลขบัตรประชาชน ".$idcard;
+       $arrPostData['messages'][0]['text'] = "ไม่พบเลขบัตรประชาชน ".$idcard." ".$error;
      }
    }else{
      $arrPostData = array();
