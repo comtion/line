@@ -17,7 +17,7 @@ if($show == "#"){
    $countid = strlen($idcard);
    if($countid == "13"){
 	   $error = "";
-	   require 'http://122.155.209.75/SPL888/linebot/check_arrest.php?operation=Add&a_cardid='.$idcard;
+	  // require 'http://122.155.209.75/SPL888/linebot/check_arrest.php?operation=Add&a_cardid='.$idcard;
 	   
 	   $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
